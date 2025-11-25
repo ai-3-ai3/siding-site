@@ -11,17 +11,26 @@
 <body>
   <!-- ================= ヘッダー ================= -->
   <header class="site-header">
-    <div class="inner header-inner">
-      <div class="site-logo">○○サイディング工業</div>
-      <nav class="site-nav">
-        <a href="#services">施工内容</a>
-        <a href="#features">こだわり</a>
-        <a href="#price">料金目安</a>
-        <a href="#works">施工事例</a>
-        <a href="#contact">お問い合わせ</a>
-      </nav>
-    </div>
-  </header>
+  <div class="inner header-inner">
+    <div class="site-logo">○○サイディング工業</div>
+
+    <!-- ハンバーガーボタン -->
+    <button class="nav-toggle" aria-label="メニューを開閉">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="site-nav">
+      <a href="#services">施工内容</a>
+      <a href="#features">こだわり</a>
+      <a href="#price">料金目安</a>
+      <a href="#works">施工事例</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
 
   <!-- ================= ヒーロー ================= -->
   <section class="hero">
@@ -249,4 +258,29 @@
     </div>
   </footer>
 </body>
+
+<script>
+  (function () {
+    const navToggle = document.querySelector('.nav-toggle');
+    const siteNav = document.querySelector('.site-nav');
+
+    if (!navToggle || !siteNav) return;
+
+    navToggle.addEventListener('click', function () {
+      navToggle.classList.toggle('is-open');
+      siteNav.classList.toggle('is-open');
+    });
+
+    // メニューのリンクを押したら閉じる
+    siteNav.addEventListener('click', function (e) {
+      if (e.target.tagName.toLowerCase() === 'a') {
+        navToggle.classList.remove('is-open');
+        siteNav.classList.remove('is-open');
+      }
+    });
+  })();
+</script>
+</body>
+</html>
+
 </html>

@@ -88,6 +88,11 @@ body {
   letter-spacing: 0.12em;
 }
 
+.site-nav {
+  display: flex;
+  align-items: center;
+}
+
 .site-nav a {
   margin-left: 20px;
   font-size: 0.88rem;
@@ -100,6 +105,46 @@ body {
   opacity: 1;
   color: var(--gold);
 }
+
+/* ハンバーガーボタン（PCでは非表示） */
+.nav-toggle {
+  display: none;
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #f5f5f5;
+  border-radius: 999px;
+  transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease, bottom 0.2s ease;
+  position: relative;
+}
+
+.nav-toggle span + span {
+  margin-top: 6px;
+}
+
+/* 開いたときの「×」表現 */
+.nav-toggle.is-open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
 
 /* ================= ボタン ================= */
 
@@ -441,29 +486,40 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .site-nav {
-    display: none; /* とりあえずスマホではナビを隠す（必要ならハンバーガーに発展） */
-  }
-
   .hero {
     padding-top: 80px;
   }
+
+  /* ここからスマホメニュー用 */
+
+  .nav-toggle {
+    display: block;           /* スマホではボタンを表示 */
+  }
+
+  .site-nav {
+    display: none;            /* 初期状態は非表示 */
+    position: absolute;
+    top: 64px;                /* ヘッダーの下 */
+    left: 0;
+    right: 0;
+    background: #111;
+    flex-direction: column;
+    padding: 12px 0 16px;
+    border-bottom: 1px solid #222;
+  }
+
+  .site-nav.is-open {
+    display: flex;            /* ボタン押したら表示 */
+  }
+
+  .site-nav a {
+    margin: 4px 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+  }
+
+  .site-nav a:last-child {
+    border-bottom: none;
+  }
 }
 
-@media (max-width: 640px) {
-  .section {
-    padding: 60px 0;
-  }
-
-  .hero-copy {
-    font-size: 1.7rem;
-  }
-
-  .flow-steps {
-    grid-template-columns: 1fr;
-  }
-
-  .works-placeholder {
-    grid-template-columns: 1fr;
-  }
-}
